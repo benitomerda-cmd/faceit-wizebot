@@ -23,8 +23,13 @@ app.get("/stats", async (req, res) => {
     const elo = cs.faceit_elo;
     const level = cs.skill_level;
     const matches = cs.matches;
-    const wins = cs.wins;
-    const winrate = ((wins / matches) * 100).toFixed(1);
+const wins = cs.wins;
+
+const winrate =
+  matches && matches > 0
+    ? ((wins / matches) * 100).toFixed(1)
+    : "N/A";
+
 
     res.send(
       `FACEIT: lvl ${level} | ELO ${elo} | WR ${winrate}%`
